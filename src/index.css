@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Truculenta:opsz,wght@12..72,100..900&display=swap');
+@import "tailwindcss";
+@plugin "daisyui";
+
+.truculent-font{
+  font-family: "Truculenta", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: bold
+}

@@ -1,5 +1,5 @@
 import React from 'react';
-import HowItWorksCard from './HowItWorksCard';
+import HowItWorksCard from './OurServicesCard';
 import { TbTruckDelivery } from "react-icons/tb";
 import { FaMapMarkedAlt } from "react-icons/fa";
 import { FaHandHoldingUsd } from "react-icons/fa";
@@ -9,7 +9,7 @@ import { BsFillGiftFill } from "react-icons/bs";
 
 
 
-const HowItWorks = () => {
+const OurServices = () => {
     const services = [
     {
         "icon" : TbTruckDelivery,
@@ -44,8 +44,9 @@ const HowItWorks = () => {
 ]
 
     return (
-        <div className='mt-30'>
-            <h1 className='text-6xl text-[#03373D] font-bold'>How it works</h1>
+        <div className='mt-30 bg-[#03373D] p-20 text-center rounded-3xl mb-20'>
+            <h1 className='text-5xl mb-5 text-white font-bold'>Our Services</h1>
+            <p className='text-[#DADADA] text-3xl'>Enjoy fast, reliable parcel delivery with real-time tracking and zero hassle. From personal packages to business shipments — we deliver on time, every time.</p>
             <div className='mt-10 mb-10 grid gap-20 grid-cols-1 md:grid-cols-3 lg:grid-cols-3'>
                 {
                     services.map((service,index)=> <HowItWorksCard key={index} service={service}></HowItWorksCard>)
@@ -55,4 +56,4 @@ const HowItWorks = () => {
     );
 };
 
-export default HowItWorks;
+export default OurServices;

@@ -22,7 +22,6 @@ const SuccessWell = () => {
                 <img className="h-10 ml-15 object-contain" src={brand6} alt="start-people 1" />
                 <img className="h-10 ml-15 object-contain" src={brand7} alt="start" />
             </Marquee>
-            {/* <hr class="h-px my-10 bg-gray-200 border-0 dark:bg-gray-700"></hr> */}
             <div className="mt-2 border-t-2 border-dashed border-[#03464D] mb-10"></div>
         </div>
     );

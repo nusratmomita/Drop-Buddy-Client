@@ -1,11 +1,11 @@
 import React from 'react';
-import HowItWorksCard from './OurServicesCard';
 import { TbTruckDelivery } from "react-icons/tb";
 import { FaMapMarkedAlt } from "react-icons/fa";
 import { FaHandHoldingUsd } from "react-icons/fa";
 import { MdMapsHomeWork } from "react-icons/md";
 import { BsFillHouseCheckFill } from "react-icons/bs";
 import { BsFillGiftFill } from "react-icons/bs";
+import OurServicesCard from './OurServicesCard';
 
 
 
@@ -49,7 +49,7 @@ const OurServices = () => {
             <p className='text-[#DADADA] text-3xl'>Enjoy fast, reliable parcel delivery with real-time tracking and zero hassle. From personal packages to business shipments — we deliver on time, every time.</p>
             <div className='mt-10 mb-10 grid gap-20 grid-cols-1 md:grid-cols-3 lg:grid-cols-3'>
                 {
-                    services.map((service,index)=> <HowItWorksCard key={index} service={service}></HowItWorksCard>)
+                    services.map((service,index)=> <OurServicesCard key={index} service={service}></OurServicesCard>)
                 }
             </div>
         </div>

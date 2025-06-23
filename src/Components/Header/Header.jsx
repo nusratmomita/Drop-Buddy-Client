@@ -44,8 +44,8 @@ const Header = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <button className='rounded-xl mr-5 btn text-gray-600 bg-white'>Sign in</button>
-                <button className='rounded-xl btn text-black bg-[#CAEB66]'>Be a Rider </button>
+                <button className='rounded-xl mr-5 btn text-gray-600 bg-white text-2xl'>Sign in</button>
+                <button className='rounded-xl btn text-black bg-[#CAEB66] text-2xl'>Be a Rider </button>
             </div>
         </div>
     );

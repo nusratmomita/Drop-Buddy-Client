@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router';
+import { Link, Links, NavLink } from 'react-router';
 import logo from "../../assets/logo.png"
+import hamburger from '../../assets/hamburger-menu.png';
 
 const Header = () => {
 
@@ -18,8 +19,8 @@ const Header = () => {
         <div className="navbar bg-base-100 shadow-sm rounded-3xl">
             <div className="navbar-start p-5">
                 <div className="dropdown">
-                <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
+                <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden w-15 h-15 hover:bg-gray-100 hover:rounded-4xl mr-2">
+                    <img src={hamburger} alt="" />
                 </div>
                 <ul
                     tabIndex={0}
@@ -43,8 +44,13 @@ const Header = () => {
                 }
                 </ul>
             </div>
-            <div className="navbar-end">
-                <button className='rounded-xl mr-5 btn text-gray-600 bg-white text-2xl'>Sign in</button>
+            <div className="navbar-end ml-30">
+                <Link to='/login' className='rounded-xl mr-5 btn text-gray-600 bg-white text-2xl'>
+                    <button className='cursor-pointer'>Log in</button>
+                </Link>
+                <Link to='/register' className='rounded-xl mr-5 btn text-gray-600 bg-white text-2xl'>
+                    <button className='cursor-pointer'>register</button>
+                </Link>                
                 <button className='rounded-xl btn text-black bg-[#CAEB66] text-2xl'>Be a Rider </button>
             </div>
         </div>

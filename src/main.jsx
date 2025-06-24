@@ -5,11 +5,15 @@ import { RouterProvider } from 'react-router'
 import { routers } from './Routes/Routes'
 import 'aos/dist/aos.css'; 
 import Aos from 'aos'
+import AuthProvider from './Authentication/AuthProvider'
 
 Aos.init()
 
 createRoot(document.getElementById('root')).render(
-  <RouterProvider
-    router={routers}
-  ></RouterProvider>
+  <AuthProvider>
+    <RouterProvider
+        router={routers} >
+    </RouterProvider>
+  </AuthProvider>
+
 )

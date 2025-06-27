@@ -5,6 +5,7 @@ import Root from "../Root/Root";
 import AuthRoot from "../Root/AuthRoot";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
+import AreaCoverage from "../Pages/AreaCoverage/AreaCoverage";
 
 export const routers = createBrowserRouter([
     {
@@ -16,7 +17,12 @@ export const routers = createBrowserRouter([
                 index: true,
                 path: "/",
                 Component: Home
-            }
+            },
+            {
+                path: "/coverage",
+                loader: () => fetch('./jsonData/warehouses.json'),
+                Component: AreaCoverage
+            },
         ]
     },
     {

@@ -5,9 +5,9 @@ import { NavLink } from 'react-router';
 
 const Login = () => {
 
-    const { register , handleSubmit ,formState:{errors} } = useForm();
+    const { register , handleSubmit , formState:{errors} } = useForm();
 
-    const onSubmit = (data) => {
+    const handleLogin = (data) => {
         console.log(data);
     }
 
@@ -15,7 +15,7 @@ const Login = () => {
         
     }
     return (
-         <div className="hero min-h-screen">
+        <div className="hero min-h-screen">
             <div className="hero-content w-full rounded-3xl mt-20 p-25  flex-col justify-evenly lg:flex-row">
                 <div className="p-2 rounded-2xl w-full max-w-lg shrink-0 shadow-2xl">
                     <div className="p-6 flex flex-col max-w-lg rounded-2xl sm:p-10 bg-gray-50 text-gray-800">
@@ -26,22 +26,29 @@ const Login = () => {
                         </p>
                             <div className="mt-5 border-b-2 border-dashed border-black"></div>
                         </div>
-                        <form onSubmit={handleSubmit(onSubmit)} className="space-y-12 text-2xl">
+                        <form onSubmit={handleSubmit(handleLogin)} className="space-y-12 text-2xl">
                             <div className="space-y-4">
                                 <div>
                                     <label htmlFor="email" className="block mb-2 text-2xl">Enter Email</label>
-                                    <input {...register('email' , {required: true})} type="email" name="email" id="email" placeholder="Enter email" className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800"/>
+                                    <input {...register('email' , 
+                                        {
+                                            required: true
+                                        })} 
+                                        type="email" name="email" id="email" placeholder="Enter email" className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800"/>
                                 </div>
                                 <div>
                                     <label htmlFor="password" className="text-2xl">Enter Password</label>
                                     <input {...register('password' , 
-                                    {
-                                        required: true , 
-                                        minLength: 6
-                                    })} 
-                                    type="password" name="password" id="password" placeholder="Enter password"className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800" />
+                                        {
+                                            required: true , 
+                                            minLength: 6
+                                        })} 
+                                        type="password" name="password" id="password" placeholder="Enter password"className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800" />
                                     {
                                         errors.password?.type === 'required' && <p className='text-red-700'>Password is required</p>
+                                    }
+                                    {
+                                        errors.password?.type === 'minLength' && <p className='text-red-700'>Password should be at least 6 characters long!</p>
                                     }
                                 </div>
                             </div>

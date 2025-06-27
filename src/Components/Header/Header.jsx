@@ -2,17 +2,18 @@ import React from 'react';
 import { Link, Links, NavLink } from 'react-router';
 import logo from "../../assets/logo.png"
 import hamburger from '../../assets/hamburger-menu.png';
+import './Header.css'
 
 const Header = () => {
 
     const links = 
     <>
-        <li><NavLink to='/'>Home</NavLink></li>
-        <li><NavLink to='/'>Services</NavLink></li>
-        <li><NavLink to='/'>Coverage</NavLink></li>
-        <li><NavLink to='/'>About Us</NavLink></li>
-        <li><NavLink to='/'>Pricing</NavLink></li>
-        <li><NavLink to='/'>Be a Rider</NavLink></li>
+        <li className='navLinks'><NavLink to='/'>Home</NavLink></li>
+        <li className="navLinks" ><NavLink to='/'>Services</NavLink></li>
+        <li className="navLinks" ><NavLink to='/coverage'>Coverage</NavLink></li>
+        <li className="navLinks" ><NavLink to='/'>About Us</NavLink></li>
+        <li className="navLinks" ><NavLink to='/'>Pricing</NavLink></li>
+        <li className="navLinks" ><NavLink to='/'>Be a Rider</NavLink></li>
     </>
 
     return (
@@ -49,9 +50,8 @@ const Header = () => {
                     <button className='cursor-pointer'>Log in</button>
                 </Link>
                 <Link to='/register' className='rounded-xl mr-5 btn text-gray-600 bg-white text-2xl'>
-                    <button className='cursor-pointer'>register</button>
+                    <button className='cursor-pointer'>Register</button>
                 </Link>                
-                <button className='rounded-xl btn text-black bg-[#CAEB66] text-2xl'>Be a Rider </button>
             </div>
         </div>
     );

@@ -1,0 +1,5 @@
+.navLinks a.active{
+    background-color: #CAEB66;
+    border-radius: 5px;
+    margin-left: 10px;
+}

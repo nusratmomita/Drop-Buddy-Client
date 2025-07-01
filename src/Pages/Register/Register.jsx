@@ -125,7 +125,7 @@ const Register = () => {
                 <button
                   type="button"
                   onClick={handleGoogle}
-                  className="btn w-full bg-white text-black text-xl border-[#e5e5e5]"
+                  className="btn whitespace-nowrap w-full bg-white text-black text-xl border-[#e5e5e5]"
                 >
                   <svg
                     aria-label="Google logo"
@@ -157,7 +157,7 @@ const Register = () => {
                   Register with Google
                 </button>
                 <div className="divider"></div>
-                <p className="px-6 text-xl text-center dark:text-gray-600">
+                <p className="whitespace-nowrap px-6 text-xl text-center dark:text-gray-600">
                   Already Have An Account?
                   <NavLink className="underline text-purple-700" to="/login">
                     {" "}

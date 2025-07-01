@@ -8,12 +8,10 @@ const Header = () => {
 
     const links = 
     <>
-        <li className='navLinks'><NavLink to='/'>Home</NavLink></li>
-        <li className="navLinks" ><NavLink to='/'>Services</NavLink></li>
-        <li className="navLinks" ><NavLink to='/coverage'>Coverage</NavLink></li>
-        <li className="navLinks" ><NavLink to='/'>About Us</NavLink></li>
-        <li className="navLinks" ><NavLink to='/'>Pricing</NavLink></li>
-        <li className="navLinks" ><NavLink to='/'>Be a Rider</NavLink></li>
+        <li className="navLinks mt-2"><NavLink to='/'>Home</NavLink></li>
+        <li className="navLinks mt-2"><NavLink to='/sendParcel'>Send Parcel</NavLink></li>
+        <li className="navLinks mt-2"><NavLink to='/coverage'>Coverage</NavLink></li>
+        <li className="navLinks mt-2"><NavLink to='/'>Be a Rider</NavLink></li>
     </>
 
     return (
@@ -25,7 +23,7 @@ const Header = () => {
                 </div>
                 <ul
                     tabIndex={0}
-                    className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow text-3xl">
+                    className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 w-52 p-2 shadow text-3xl">
                     {
                         links
                     }

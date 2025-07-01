@@ -14,16 +14,14 @@ const AuthRoot = () => {
                         <h1 className='text-2xl font-extrabold -ml-4 mt-5'>DropBuddy</h1>
                     </div>
                 </Link>
-                <div className="hero-content min-h-screen flex-row lg:flex-row-reverse justify-center items-center">
-                    {/* <div> */}
-                        <div>
-                            <img
-                                src={authImage}
-                                className="flex-1 max-w-md rounded-3xl shadow-2xl"
-                            />
-
-                        </div>
-                    {/* </div> */}
+                <div className="lg:min-h-screen flex flex-col lg:flex-row-reverse justify-center items-center">
+                    <div>
+                        <img
+                            src={authImage}
+                            className="flex-1 max-w-md rounded-3xl shadow-2xl"
+                        />
+                    </div>
+                    
                     <div className='flex-1'>
                         <Outlet></Outlet>
                     </div>

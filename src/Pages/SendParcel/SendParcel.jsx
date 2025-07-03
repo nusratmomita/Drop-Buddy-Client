@@ -1,15 +1,30 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { useLoaderData } from 'react-router';
 import Swal from 'sweetalert2';
+import { AuthContext } from '../../Authentication/AuthContext';
+import UseAxiosSecureAPI from '../../CustomHooks/UseAxiosSecureAPI';
+
 
 const SendParcel = () => {
 
     const serviceCenters = useLoaderData();
     // console.log(serviceCenters)
 
+    const {user} = useContext(AuthContext);
+
     const {register , formState:{errors} , handleSubmit , watch} = useForm();
+
+    const generateTrackingId = () => {
+        const date = new Date();
+        const datePart = date.toISOString().split("T")[0].replace(/-/g, "");
+        const rand = Math.random().toString(36).substring(2,7).toUpperCase();
+
+        return `PCL-${datePart}-${rand}`;
+    }
+
+    const axiosApi = UseAxiosSecureAPI();
 
     // extracting unique regions
     const uniqueRegions = [... new Set(serviceCenters.map((center) => center.region))];
@@ -25,7 +40,7 @@ const SendParcel = () => {
     const receiverRegion = watch('receiver_region')
 
     const handleSendParcel = (data) => {
-        console.log(data);
+        // console.log(data);
         const weight = parseFloat(data.weight) || 0;
         const isSameDistrict = data.sender_center === data.receiver_center;
 
@@ -61,6 +76,7 @@ const SendParcel = () => {
             
         }
         const totalCost = extraCost + baseCost;
+       
         Swal.fire({
         title: "Delivery Cost Breakdown",
         icon: "info",
@@ -85,8 +101,30 @@ const SendParcel = () => {
             popup: "rounded-xl shadow-md px-6 py-6",
         },
         }).then((result) => {
-            if (result.isConfirmed) {
-                console.log("all ok")
+            if (result.isConfirmed) { 
+                const newParcel = { ...data , 
+                    totalCost , 
+                    user_email: user?.email,
+                    payment_status: "unpaid",
+                    delivery_status: "pending",
+                    creation_date: new Date().toISOString(),
+                    tracking_id:  generateTrackingId()
+                };
+                // console.log(newParcel);
+                axiosApi.post("/parcels" , newParcel)
+                .then(res => {
+                    console.log(res.data);
+                    if(res.data.insertedId){
+                        Swal.fire({
+                            title: "Redirecting...",
+                            text: "Proceeding to payment gateway.",
+                            icon: "success",
+                            timer: 1500,
+                            showConfirmButton: false,
+                        });
+                    }
+                })
+
             }
         });
     }

@@ -25,9 +25,14 @@ const Header = () => {
     const links = 
     <>
         <li className="navLinks mt-2"><NavLink to='/'>Home</NavLink></li>
-        <li className="navLinks mt-2"><NavLink to='/sendParcel'>Send Parcel</NavLink></li>
         <li className="navLinks mt-2"><NavLink to='/coverage'>Coverage</NavLink></li>
         <li className="navLinks mt-2"><NavLink to='/'>Be a Rider</NavLink></li>
+        {
+            user?.email && <>
+                <li className="navLinks mt-2"><NavLink to='/sendParcel'>Send Parcel</NavLink></li>
+                <li className="navLinks mt-2"><NavLink to='/dashboard'>Dashboard</NavLink></li>
+            </>
+        }
     </>
 
     return (
@@ -78,7 +83,7 @@ const Header = () => {
                 </div>
                 {
                     (user && user?.email) ?
-                    <button className="ml-5 cursor-pointer p-2 flex items-center gap-1 text-3xl font-semibold rounded-2xl bg-[#CAEB66]" onClick={handleSignOut} ><FiLogOut size={25} color='black'></FiLogOut>Logout</button>
+                    <button className="ml-1 cursor-pointer p-2 flex items-center gap-1 text-3xl font-semibold rounded-2xl bg-[#CAEB66]" onClick={handleSignOut} ><FiLogOut size={25} color='black'></FiLogOut>Logout</button>
                     :
                     "" 
                 }

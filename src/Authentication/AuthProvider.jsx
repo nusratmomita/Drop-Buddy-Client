@@ -1,45 +1,65 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AuthContext } from './AuthContext';
-import { auth } from '../firebase/firebase.config'
-import { createUserWithEmailAndPassword , GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import { auth } from '../Firebase/firebase.config.js'
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 
 const AuthProvider = ({children}) => {
+
+    const provider = new GoogleAuthProvider();
 
     const [user , setUser] = useState(null);
     const [loading , setLoading] = useState(true);
 
-    const provider = new GoogleAuthProvider();
+    // console.log(loading,user);
 
-    // creating new user
+
+    // register with email & password
     const handleRegister = (email,password) => {
         setLoading(false);
-        return createUserWithEmailAndPassword(auth, email,password)
+        return createUserWithEmailAndPassword(auth,email,password)
     }
 
-    // handling login
-    const handleLogin = (email,password) => {
-       setLoading(false);
-       return signInWithEmailAndPassword(auth,email,password);
-    }    
-
-    // handle Google Auth
+    // register with google
     const handleGoogleAuth = () => {
-        setLoading(false);
-        return signInWithPopup(auth,provider)
+        return signInWithPopup(auth,provider);
     }
+
+    // login with email & password
+    const handleLogin = (email,password) => {
+        return signInWithEmailAndPassword(auth,email,password);
+    }
+
+    // update profile
+    const handleUpdateProfile = (updateData) => {
+        return updateProfile(auth.currentUser , updateData)
+    } 
 
     // handle logout
     const handleLogout = () => {
         return signOut(auth);
     }
-
+    
+    // setting up an observer
+    useEffect(()=>{
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+            setUser(currentUser);
+            setLoading(false);
+        })
+        
+        return () => {
+            unsubscribe();
+        }
+    })
+    
     const userInfo = {
         handleRegister,
         handleGoogleAuth,
+        handleUpdateProfile,
         handleLogin,
         handleLogout,
         user,
-        loading
+        setUser,
+        loading,setLoading,
     }
 
     return (

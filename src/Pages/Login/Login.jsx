@@ -1,18 +1,49 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { NavLink } from 'react-router';
+import { NavLink, useNavigate } from 'react-router';
+import { AuthContext } from '../../Authentication/AuthContext';
+import { toast } from 'react-toastify';
+
 
 
 const Login = () => {
 
     const { register , handleSubmit , formState:{errors} } = useForm();
 
-    const handleLogin = (data) => {
-        console.log(data);
+    const {handleLogin , handleGoogleAuth} = useContext(AuthContext);
+
+
+    const navigate = useNavigate();
+
+    const handleLoginForm = (data) => {
+        console.log(data)
+        const email = data.email;
+        const password = data.password;
+
+        handleLogin(email,password)
+        .then(()=>{
+            toast.success("You've successfully logged in!");
+            setTimeout(()=>{
+                navigate('/')
+            },1500);
+        })
+        .catch(()=>{
+            toast.error("You have put invalid credentials.Please try again")
+        })
     }
 
     const handleGoogle = () => {
-        
+        handleGoogleAuth()
+        .then(()=>{
+        toast.success("You've successfully logged in!");
+        setTimeout(()=>{
+            navigate('/');
+        },1500)
+        })
+        .catch(()=>{
+            // console.log(error)
+            toast.error("You've put invalid credentials. Please try again.")
+        })
     }
     return (
         <div className="hero min-h-screen">
@@ -26,7 +57,7 @@ const Login = () => {
                         </p>
                             <div className="mt-5 border-b-2 border-dashed border-black"></div>
                         </div>
-                        <form onSubmit={handleSubmit(handleLogin)} className="space-y-12 text-2xl">
+                        <form onSubmit={handleSubmit(handleLoginForm)} className="space-y-12 text-2xl">
                             <div className="space-y-4">
                                 <div>
                                     <label htmlFor="email" className="block mb-2 text-2xl">Enter Email</label>

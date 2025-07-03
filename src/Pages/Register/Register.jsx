@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
+import { AuthContext } from "../../Authentication/AuthContext";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const {
@@ -9,11 +11,60 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-  const handleRegister = (data) => {
-    console.log(data);
-  };
+  const {handleRegister , handleGoogleAuth , handleUpdateProfile , setUser } = useContext(AuthContext);
 
-  const handleGoogle = () => {};
+  const navigate = useNavigate();
+
+  const handleRegisterForm = (data) => {
+    console.log(data);
+    const email = data.email;
+    const name = data.name;
+    const password = data.password;
+    const photoURL = data.photoURL;
+
+    console.log(email,password,photoURL);
+
+    handleRegister(email,password)
+        .then((result)=>{
+            const user = result.user
+            handleUpdateProfile({displayName: name , photoURL: photoURL})
+            .then(()=>{
+                setUser({...user , displayName: name , photoURL: photoURL})
+                toast.success("You've successfully created an account!");
+                setTimeout(()=>{
+                    navigate('/');
+                },1500)
+            })
+            .catch(()=>{
+                toast.error("You have put invalid credentials")
+                setUser(user)
+            })
+
+        })
+        .catch(()=>{
+            // console.log(error)
+            toast.error("You've put invalid credentials. Please try again.")
+        })
+
+
+    }
+
+    const handleGoogle = () => {
+        handleGoogleAuth()
+        .then(()=>{
+        toast.success("You've successfully created an account!");
+        setTimeout(()=>{
+            navigate('/');
+        },1500)
+        })
+        .catch(()=>{
+            // console.log(error)
+            toast.error("You've put invalid credentials. Please try again.")
+        })
+    }
+
+
+
   return (
     <div className="hero min-h-screen">
       <div className="hero-content w-full rounded-3xl mt-20 p-25  flex-col justify-evenly lg:flex-row">
@@ -28,7 +79,7 @@ const Register = () => {
             </div>
             <form
               className="space-y-12 "
-              onSubmit={handleSubmit(handleRegister)}
+              onSubmit={handleSubmit(handleRegisterForm)}
             >
               <div className="space-y-4 grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-2 ">
                 <div>

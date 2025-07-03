@@ -148,8 +148,8 @@ const SendParcel = () => {
                                 type="number"
                                 step="0.1"
                                 {...register("weight")}
-                                disabled={parcelType !== "non-document"}
-                                className={`input input-bordered w-full ${parcelType !== "non-document" ? "bg-gray-100 cursor-not-allowed" : ""
+                                disabled={parcelType !== "Non-document"}
+                                className={`input input-bordered w-full ${parcelType === "Document" ? "bg-gray-100 cursor-not-allowed" : ""
                                     }`}
                                 placeholder="Enter weight"
                             />

@@ -3,9 +3,12 @@ import { AuthContext } from '../../Authentication/AuthContext';
 import UseAxiosSecureAPI from '../../CustomHooks/UseAxiosSecureAPI';
 import { useQuery } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
+import { Link, useNavigate } from 'react-router';
 
 const MyParcels = () => {
     const {user} = useContext(AuthContext);
+
+    const navigate = useNavigate()
 
     const axiosApi = UseAxiosSecureAPI();
 
@@ -60,8 +63,12 @@ const MyParcels = () => {
 
     }
 
-     const formatDate = (date) => {
-        return new Date(date).toLocaleString(); // Format: "6/22/2025, 3:11:31 AM"
+    const handlePay = (id) => {
+        navigate(`/dashboard/paymentIntegration/${id}`);
+    } 
+
+    const formatDate = (date) => {
+    return new Date(date).toLocaleString(); // Format: "6/22/2025, 3:11:31 AM"
     };
 
     return (
@@ -96,21 +103,23 @@ const MyParcels = () => {
                                     {parcel.payment_status}
                                 </span>
                             </td>
-                            <td className="space-x-2 flex items-center justify-center mt-3">
+                            <td className="space-x-2 flex items-center justify-center mt-8">
                                 <button
                                     onClick={() => handleView(parcel._id)}
                                     className="cursor-pointer text-2xl p-4 btn btn-xs btn-outline"
                                 >
                                     View
                                 </button>
-                                {/* {parcel.payment_status === "unpaid" && (
-                                    // <button
-                                    //     onClick={() => handlePay(parcel._id)}
-                                    //     className="cursor-pointer btn btn-xs btn-primary text-black"
-                                    // >
-                                    //     Pay
-                                    // </button>
-                                )} */}
+                                {parcel.payment_status === "unpaid" && (
+                                    <Link to={`/dashboard/paymentIntegration/${parcel._id}`}>
+                                        <button
+                                        onClick={() => handlePay(parcel._id)}
+                                        className="cursor-pointer text-2xl p-4 btn btn-xs btn-info"
+                                        >
+                                            Pay
+                                        </button>
+                                    </Link>
+                                )}
                                 <button
                                     onClick={() => handleDelete(parcel._id)}
                                     className="cursor-pointer text-2xl p-4 btn btn-xs btn-error"

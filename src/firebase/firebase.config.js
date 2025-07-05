@@ -5,12 +5,12 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCvFIhPRF8ItzJgL84oBKirxRONiV9KQ-M",
-  authDomain: "dropbuddy-67592.firebaseapp.com",
-  projectId: "dropbuddy-67592",
-  storageBucket: "dropbuddy-67592.firebasestorage.app",
-  messagingSenderId: "758503569337",
-  appId: "1:758503569337:web:1a8e4dd289bb5a7cca2868"
+  apiKey: import.meta.env.VITE_apiKey,
+  authDomain: import.meta.env.authDomain,
+  projectId: import.meta.env.projectId,
+  storageBucket: import.meta.env.storageBucket,
+  messagingSenderId: import.meta.env.messagingSenderId,
+  appId: import.meta.env.appId
 };
 
 // Initialize Firebase

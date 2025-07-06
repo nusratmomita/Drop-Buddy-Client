@@ -1,6 +1,7 @@
 import React from 'react';
 import {  NavLink, Outlet } from 'react-router';
-import logo from ".././assets/logo.png"
+import logo from ".././assets/logo.png";
+import { FaHome, FaBoxOpen, FaMoneyCheckAlt, FaUserEdit, FaSearchLocation, FaUserCheck, FaUserClock } from 'react-icons/fa';
 
 
 const DashboardRoot = () => {
@@ -46,8 +47,50 @@ const DashboardRoot = () => {
                         <h1 className='text-2xl font-extrabold -ml-4 mt-5'>DropBuddy</h1>
                     </div>
                
-                    <li><NavLink className="text-2xl font-semibold"to='/'>Home</NavLink></li>
-                    <li><NavLink className="text-2xl font-semibold"to="/dashboard/myParcels">My Parcels</NavLink></li>
+                    <li>
+                        <NavLink to="/">
+                            <FaHome className="inline-block mr-2" />
+                            Home
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/dashboard/myParcels">
+                            <FaBoxOpen className="inline-block mr-2" />
+                            My Parcels
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/dashboard/paymentHistory">
+                            <FaMoneyCheckAlt className="inline-block mr-2" />
+                            Payment History
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/dashboard/track">
+                            <FaSearchLocation className="inline-block mr-2" />
+                            Track a Package
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/dashboard/profile">
+                            <FaUserEdit className="inline-block mr-2" />
+                            Update Profile
+                        </NavLink>
+                    </li>
+
+                    {/* riders link */}
+                    <li>
+                        <NavLink to="/dashboard/active-riders">
+                            <FaUserCheck className="inline-block mr-2" />
+                            Active Riders
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/dashboard/pending-riders">
+                            <FaUserClock className="inline-block mr-2" />
+                            Pending Riders
+                        </NavLink>
+                    </li>
                 </ul>
             </div>
         </div>

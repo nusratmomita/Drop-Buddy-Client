@@ -1,8 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { NavLink, useNavigate } from "react-router";
 import { AuthContext } from "../../Authentication/AuthContext";
 import { toast } from "react-toastify";
+import axios from "axios";
+import UseCommonAxiosAPI from "../../CustomHooks/UseCommonAxiosAPI";
 
 const Register = () => {
   const {
@@ -11,58 +13,91 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-  const {handleRegister , handleGoogleAuth , handleUpdateProfile , setUser } = useContext(AuthContext);
+  const {handleRegister , handleGoogleAuth , handleUpdateProfile } = useContext(AuthContext);
+
+  const axiosApi = UseCommonAxiosAPI();
 
   const navigate = useNavigate();
 
+  const [profileImage , setProfileImage] = useState('');
+
+
   const handleRegisterForm = (data) => {
-    console.log(data);
+    // console.log(data);
     const email = data.email;
-    const name = data.name;
     const password = data.password;
-    const photoURL = data.photoURL;
-
-    console.log(email,password,photoURL);
-
+    
     handleRegister(email,password)
-        .then((result)=>{
-            const user = result.user
-            handleUpdateProfile({displayName: name , photoURL: photoURL})
-            .then(()=>{
-                setUser({...user , displayName: name , photoURL: photoURL})
-                toast.success("You've successfully created an account!");
-                setTimeout(()=>{
-                    navigate('/');
-                },1500)
-            })
-            .catch(()=>{
-                toast.error("You have put invalid credentials")
-                setUser(user)
-            })
+      .then(async()=>{
+        // const user = result.user;
 
+        // getting user info
+        const userInfo = {
+          email : data.email,
+          role : 'user',// default role
+          created_at : new Date().toISOString(),
+          last_logged_in : new Date().toISOString()
+        }
+
+        const res = await axiosApi.post("/users" , userInfo);
+        console.log(res.data);
+
+        const updateProfile = {
+          displayName:data.name,
+          photoURL: profileImage
+        }
+        // console.log(updateProfile)
+
+        handleUpdateProfile(updateProfile)
+        .then(()=>{
+          // console.log("Profile updated done")
+          navigate('/')
         })
         .catch(()=>{
-            // console.log(error)
-            toast.error("You've put invalid credentials. Please try again.")
+          // console.log(error)
         })
-
-
+      })
     }
 
     const handleGoogle = () => {
-        handleGoogleAuth()
-        .then(()=>{
+      handleGoogleAuth()
+      .then(async (result)=>{
+        const user = result.user;
+        console.log(user);
+
+        const userInfo = {
+          email : user.email,
+          role : 'user',
+          created_at : new Date().toISOString(),
+          last_logged_in : new Date().toISOString()
+        }
+        const res = await axiosApi.post("/users" , userInfo);
+        console.log(res.data);
+
         toast.success("You've successfully created an account!");
         setTimeout(()=>{
-            navigate('/');
+          navigate('/');
         },1500)
-        })
-        .catch(()=>{
-            // console.log(error)
-            toast.error("You've put invalid credentials. Please try again.")
-        })
+      })
+      .catch((error)=>{
+        console.log(error)
+        toast.error("Google sign-in failed. Please try again.")
+      })
     }
+    
+    const handlePhotoUpload = async(e) => {
+      const image = e.target.files[0];
+      // console.log(image);
 
+      const formData = new FormData();
+      formData.append("image" , image);
+      
+      const imageUploadUrl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_upload_key}`;
+      // console.log(imageUploadUrl)
+
+      const res = await axios.post(imageUploadUrl,formData);
+      setProfileImage(res.data.data.url);
+    }
 
 
   return (
@@ -81,7 +116,7 @@ const Register = () => {
               className="space-y-12 "
               onSubmit={handleSubmit(handleRegisterForm)}
             >
-              <div className="space-y-4 grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-2 ">
+              <div className="space-y-4 grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-1">
                 <div>
                   <label htmlFor="name" className="block mb-2 text-3xl">
                     Name
@@ -123,18 +158,13 @@ const Register = () => {
                     Photo URL
                   </label>
                   <input
-                    {...register("photoURL", {
-                      required: true,
-                    })}
-                    type="text"
+                    onChange={handlePhotoUpload}
+                    type="file"
                     name="photoURL"
                     id="photoURL"
                     placeholder="photo URL"
                     className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 text-3xl"
                   />
-                  {errors.photoURL?.type === "required" && (
-                    <p className="text-red-700">Password is required</p>
-                  )}
                 </div>
                 <div>
                   <div className="flex justify-between mb-2">

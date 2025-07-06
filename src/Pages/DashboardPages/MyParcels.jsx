@@ -21,7 +21,7 @@ const MyParcels = () => {
         }
     })
 
-    console.log(parcel);
+    // console.log(parcel);
 
     const handleView = () => {
 

@@ -1,13 +1,16 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { useLoaderData } from 'react-router';
+import { useLoaderData, useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../Authentication/AuthContext';
 import UseAxiosSecureAPI from '../../CustomHooks/UseAxiosSecureAPI';
 
 
 const SendParcel = () => {
+
+    const navigate = useNavigate();
+
 
     const serviceCenters = useLoaderData();
     // console.log(serviceCenters)
@@ -122,6 +125,7 @@ const SendParcel = () => {
                             timer: 1500,
                             showConfirmButton: false,
                         });
+                        navigate("/dashboard/myParcels")
                     }
                 })
 

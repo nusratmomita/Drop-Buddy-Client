@@ -26,7 +26,7 @@ const Header = () => {
     <>
         <li className="navLinks mt-2"><NavLink to='/'>Home</NavLink></li>
         <li className="navLinks mt-2"><NavLink to='/coverage'>Coverage</NavLink></li>
-        <li className="navLinks mt-2"><NavLink to='/'>Be a Rider</NavLink></li>
+        <li className="navLinks mt-2"><NavLink to='/beARider'>Be a Rider</NavLink></li>
         {
             user?.email && <>
                 <li className="navLinks mt-2"><NavLink to='/sendParcel'>Send Parcel</NavLink></li>

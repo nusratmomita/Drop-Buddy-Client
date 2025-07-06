@@ -12,6 +12,7 @@ import DashboardRoot from "../Root/DashboardRoot";
 import MyParcels from "../Pages/DashboardPages/MyParcels";
 import PaymentIntegration from "../Pages/DashboardPages/PaymentIntegration";
 import PaymentHistory from "../Pages/DashboardPages/PaymentHistory";
+import BeARider from "../Pages/BeARider/BeARider";
 
 export const routers = createBrowserRouter([
     {
@@ -28,6 +29,11 @@ export const routers = createBrowserRouter([
                 path: "/coverage",
                 loader: () => fetch('./jsonData/warehouses.json'),
                 Component: AreaCoverage
+            },
+            {
+                path: "/beARider",
+                loader: () => fetch('./jsonData/warehouses.json'),
+                element: <PrivateRoute> <BeARider></BeARider> </PrivateRoute>
             },
             {
                 path: "/sendParcel",

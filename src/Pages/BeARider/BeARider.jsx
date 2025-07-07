@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 import { useContext, useState } from "react";
 import { useLoaderData } from "react-router";
 import { AuthContext } from "../../Authentication/AuthContext";
+import UseAxiosSecureAPI from "../../CustomHooks/UseAxiosSecureAPI";
 
 
 const BeARider = () => {
@@ -15,6 +16,8 @@ const BeARider = () => {
     } = useForm();
 
     const [selectedRegion, setSelectedRegion] = useState("");
+    
+    const axiosApi = UseAxiosSecureAPI();
 
     const serviceCenters = useLoaderData();
 
@@ -36,6 +39,16 @@ const BeARider = () => {
 
 
         // Send to your backend here
+        axiosApi.post("/rider" , riderData)
+        .then((res)=>{
+            if(res.data.insertedId){
+                Swal.fire({
+                    icon: "success",
+                    title: "Application Submitted!",
+                    text: "Your application is pending.kindly go to dashboard and confirm it.",
+                });
+            }
+        })
         reset();
     };
 
@@ -46,7 +59,6 @@ const BeARider = () => {
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div className="grid grid-cols-1 gap-4">
-                    {/* Name (read-only) */}
                     <input
                         type="text"
                         value={user?.displayName || ""}
@@ -54,7 +66,7 @@ const BeARider = () => {
                         className="input input-bordered text-black w-full bg-gray-100"
                     />
 
-                    {/* Email (read-only) */}
+                    
                     <input
                         type="email"
                         value={user?.email || ""}
@@ -62,7 +74,7 @@ const BeARider = () => {
                         className="input input-bordered text-black w-full bg-gray-100"
                     />
 
-                    {/* Age */}
+                    
                     <input
                         type="number"
                         placeholder="Your Age"
@@ -73,7 +85,7 @@ const BeARider = () => {
                         <span className="text-red-500 text-sm">You must be 18 or older</span>
                     )}
 
-                    {/* Phone */}
+                    
                     <input
                         type="tel"
                         placeholder="Phone Number"
@@ -84,7 +96,7 @@ const BeARider = () => {
                         <span className="text-red-500 text-sm">Phone number is required</span>
                     )}
 
-                    {/* National ID */}
+                    
                     <input
                         type="text"
                         placeholder="National ID Card Number"
@@ -95,7 +107,7 @@ const BeARider = () => {
                         <span className="text-red-500 text-sm">NID is required</span>
                     )}
 
-                    {/* Region */}
+                    
                     <select
                         className="select select-bordered w-full"
                         {...register("region", { required: true })}
@@ -110,7 +122,7 @@ const BeARider = () => {
                     </select>
                     {errors.region && <span className="text-red-500 text-sm">Region is required</span>}
 
-                    {/* District */}
+                    
                     <select
                         className="select select-bordered w-full"
                         {...register("district", { required: true })}
@@ -125,7 +137,7 @@ const BeARider = () => {
                     </select>
                     {errors.district && <span className="text-red-500 text-sm">District is required</span>}
 
-                    {/* Bike Brand */}
+                    
                     <input
                         type="text"
                         placeholder="Bike Brand (e.g., Yamaha FZ)"
@@ -135,8 +147,6 @@ const BeARider = () => {
                     {errors.bike_brand && (
                         <span className="text-red-500 text-sm">Bike brand is required</span>
                     )}
-
-                    {/* Bike Registration */}
                     <input
                         type="text"
                         placeholder="Bike Registration Number"
@@ -146,8 +156,6 @@ const BeARider = () => {
                     {errors.bike_registration && (
                         <span className="text-red-500 text-sm">Registration number is required</span>
                     )}
-
-                    {/* Additional Info (optional) */}
                     <textarea
                         placeholder="Additional information (optional)"
                         className="textarea textarea-bordered w-full"

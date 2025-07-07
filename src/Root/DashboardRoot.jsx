@@ -80,13 +80,13 @@ const DashboardRoot = () => {
 
                     {/* riders link */}
                     <li>
-                        <NavLink to="/dashboard/active-riders">
+                        <NavLink to="/dashboard/activeRiders">
                             <FaUserCheck className="inline-block mr-2" />
                             Active Riders
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/dashboard/pending-riders">
+                        <NavLink to="/dashboard/pendingRiders">
                             <FaUserClock className="inline-block mr-2" />
                             Pending Riders
                         </NavLink>

@@ -2,6 +2,7 @@ import React from 'react';
 import {  NavLink, Outlet } from 'react-router';
 import logo from ".././assets/logo.png";
 import { FaHome, FaBoxOpen, FaMoneyCheckAlt, FaUserEdit, FaSearchLocation, FaUserCheck, FaUserClock } from 'react-icons/fa';
+import { FaShield } from 'react-icons/fa6';
 
 
 const DashboardRoot = () => {
@@ -39,7 +40,7 @@ const DashboardRoot = () => {
             </div>
             <div className="drawer-side">
                 <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
-                <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4"> 
+                <ul className="menu bg-base-200 text-2xl min-h-full w-80 p-4"> 
                     {/* Sidebar for large screen content here */}
                     
                     <div className='ml-15 flex mb-10'>
@@ -89,6 +90,12 @@ const DashboardRoot = () => {
                         <NavLink to="/dashboard/pendingRiders">
                             <FaUserClock className="inline-block mr-2" />
                             Pending Riders
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/dashboard/makeAdmin">
+                            <FaShield className="inline-block mr-2" />
+                            Make Admin
                         </NavLink>
                     </li>
                 </ul>

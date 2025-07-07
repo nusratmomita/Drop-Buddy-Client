@@ -25,7 +25,7 @@ const PendingRiders = () => {
     }
 
 
-    const handleDecision = async(id , action) => {
+    const handleDecision = async(id , action , email) => {
         const confirm = await Swal.fire({
             title: `${action === 'approve' ? "Approve" : "Rejects"} Application`,
             icon: "warning",
@@ -38,13 +38,13 @@ const PendingRiders = () => {
             return;
         }
 
+        // sending email to accept as a rider
         const status = action === "approve" ? "active" : "rejected";
-        await axiosApi.patch(`/rider/${id}/status`, { status });
+        await axiosApi.patch(`/rider/${id}/status`, { status  , email});
 
         refetch(),
 
         Swal.fire("Success" , `Rider ${action}d successfully` , "success");
-
     }
 
     return (
@@ -81,13 +81,13 @@ const PendingRiders = () => {
                                         <FaEye />
                                     </button>
                                     <button
-                                        onClick={() => handleDecision(rider._id, "approve")}
+                                        onClick={() => handleDecision(rider._id, "approve" , rider.email)}
                                         className="btn btn-sm btn-success"
                                     >
                                         <FaCheck />
                                     </button>
                                     <button
-                                        onClick={() => handleDecision(rider._id, "reject")}
+                                        onClick={() => handleDecision(rider._id, "reject" , rider.email)}
                                         className="btn btn-sm btn-error"
                                     >
                                         <FaTimes />

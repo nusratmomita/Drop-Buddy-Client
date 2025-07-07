@@ -8,6 +8,7 @@ import UseAxiosSecureAPI from "../../CustomHooks/UseAxiosSecureAPI";
 
 const BeARider = () => {
     const { user } = useContext(AuthContext);
+    console.log(user.displayName)
     const {
         register,
         handleSubmit,

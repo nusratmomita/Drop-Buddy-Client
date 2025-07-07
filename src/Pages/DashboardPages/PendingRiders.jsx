@@ -38,9 +38,8 @@ const PendingRiders = () => {
             return;
         }
 
-        await axiosApi.patch(`/rider/${id}/status`, { 
-            status: action === "approve" ? "active" : "rejected",
-        });
+        const status = action === "approve" ? "active" : "rejected";
+        await axiosApi.patch(`/rider/${id}/status`, { status });
 
         refetch(),
 

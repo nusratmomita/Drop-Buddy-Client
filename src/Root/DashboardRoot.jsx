@@ -3,9 +3,14 @@ import {  NavLink, Outlet } from 'react-router';
 import logo from ".././assets/logo.png";
 import { FaHome, FaBoxOpen, FaMoneyCheckAlt, FaUserEdit, FaSearchLocation, FaUserCheck, FaUserClock } from 'react-icons/fa';
 import { FaShield } from 'react-icons/fa6';
+import UseRoleQuery from '../CustomHooks/UseRoleQuery';
 
 
 const DashboardRoot = () => {
+
+    const {role , roleLoading} = UseRoleQuery();
+    console.log(role , roleLoading)
+
     return (
         <div className="drawer lg:drawer-open">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -79,8 +84,32 @@ const DashboardRoot = () => {
                         </NavLink>
                     </li>
 
-                    {/* riders link */}
-                    <li>
+                    {
+                        !roleLoading && role === 'admin' &&
+                        <>
+                            <li>
+                                <NavLink to="/dashboard/activeRiders">
+                                    <FaUserCheck className="inline-block mr-2" />
+                                    Active Riders
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/dashboard/pendingRiders">
+                                    <FaUserClock className="inline-block mr-2" />
+                                    Pending Riders
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/dashboard/makeAdmin">
+                                    <FaShield className="inline-block mr-2" />
+                                    Make Admin
+                                </NavLink>
+                            </li>
+                        </>
+                    }
+
+                    
+                    {/* <li>
                         <NavLink to="/dashboard/activeRiders">
                             <FaUserCheck className="inline-block mr-2" />
                             Active Riders
@@ -97,7 +126,7 @@ const DashboardRoot = () => {
                             <FaShield className="inline-block mr-2" />
                             Make Admin
                         </NavLink>
-                    </li>
+                    </li> */}
                 </ul>
             </div>
         </div>

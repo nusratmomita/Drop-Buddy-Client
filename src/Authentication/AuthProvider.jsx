@@ -15,17 +15,19 @@ const AuthProvider = ({children}) => {
 
     // register with email & password
     const handleRegister = (email,password) => {
-        setLoading(false);
+        setLoading(true);
         return createUserWithEmailAndPassword(auth,email,password)
     }
 
     // register with google
     const handleGoogleAuth = () => {
+        setLoading(true);
         return signInWithPopup(auth,provider);
     }
 
     // login with email & password
     const handleLogin = (email,password) => {
+        setLoading(true);
         return signInWithEmailAndPassword(auth,email,password);
     }
 
@@ -36,6 +38,7 @@ const AuthProvider = ({children}) => {
 
     // handle logout
     const handleLogout = () => {
+        setLoading(false);
         return signOut(auth);
     }
     

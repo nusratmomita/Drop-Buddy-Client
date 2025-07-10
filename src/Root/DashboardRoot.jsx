@@ -1,8 +1,8 @@
 import React from 'react';
 import {  NavLink, Outlet } from 'react-router';
 import logo from ".././assets/logo.png";
-import { FaHome, FaBoxOpen, FaMoneyCheckAlt, FaUserEdit, FaSearchLocation, FaUserCheck, FaUserClock } from 'react-icons/fa';
-import { FaShield } from 'react-icons/fa6';
+import { FaHome, FaBoxOpen, FaMoneyCheckAlt, FaUserEdit, FaSearchLocation, FaUserCheck, FaUserClock, FaStackExchange } from 'react-icons/fa';
+import { FaMotorcycle, FaShield } from 'react-icons/fa6';
 import UseRoleQuery from '../CustomHooks/UseRoleQuery';
 
 
@@ -85,8 +85,26 @@ const DashboardRoot = () => {
                     </li>
 
                     {
+                        !roleLoading && role === 'rider' &&
+                        <>
+                             <li>
+                                <NavLink to="/dashboard/assignRidersParcels">
+                                    <FaStackExchange className="inline-block mr-2" />
+                                    Your Assigned Parcels
+                                </NavLink>
+                            </li>
+                        </>
+                    }
+
+                    {
                         !roleLoading && role === 'admin' &&
                         <>
+                            <li>
+                                <NavLink to="/dashboard/assignRiders">
+                                    <FaMotorcycle className="inline-block mr-2" />
+                                    Assign Riders
+                                </NavLink>
+                            </li>
                             <li>
                                 <NavLink to="/dashboard/activeRiders">
                                     <FaUserCheck className="inline-block mr-2" />

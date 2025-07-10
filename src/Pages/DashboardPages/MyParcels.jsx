@@ -16,7 +16,7 @@ const MyParcels = () => {
     const {data : parcel = [], refetch} = useQuery({
         queryKey: ['myParcels' , user?.email],
         queryFn: async () => {
-            const res = await axiosApi.get(`/parcels/email?email=${user?.email}`);
+            const res = await axiosApi.get(`/parcels?email=${user?.email}`);
             return res.data;
         }
     })

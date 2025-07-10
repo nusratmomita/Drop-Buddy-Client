@@ -99,7 +99,7 @@ const BeARider = () => {
 
                     
                     <input
-                        type="text"
+                        type="number"
                         placeholder="National ID Card Number"
                         className="input input-bordered w-full"
                         {...register("nid", { required: true })}

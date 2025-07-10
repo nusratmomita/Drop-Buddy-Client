@@ -18,6 +18,9 @@ import ActiveRiders from "../Pages/DashboardPages/ActiveRiders";
 import MakeAdmin from "../Pages/DashboardPages/MakeAdmin";
 import AdminPrivateRoute from "../Pages/PrivateRoute/AdminPrivateRoute";
 import ForbiddenAccess from "../Pages/ForbiddenAccess/ForbiddenAccess";
+import AssignRiders from "../Pages/DashboardPages/AssignRiders";
+import RiderPrivateRoute from "../Pages/PrivateRoute/RiderPrivateRoute";
+import AssignRidersToParcel from "../Pages/DashboardPages/AssignRidersToParcel";
 
 export const routers = createBrowserRouter([
     {
@@ -81,6 +84,10 @@ export const routers = createBrowserRouter([
                 path: "/dashboard/paymentHistory",
                 Component: PaymentHistory
             },
+             {
+                path: "/dashboard/assignRiders",
+                element: <AdminPrivateRoute> <AssignRiders></AssignRiders> </AdminPrivateRoute>
+            },
             {
                 path: "/dashboard/pendingRiders",
                 element: <AdminPrivateRoute> <PendingRiders></PendingRiders> </AdminPrivateRoute>
@@ -91,8 +98,13 @@ export const routers = createBrowserRouter([
             },
             {
                 path: "/dashboard/makeAdmin",
-                // Component: MakeAdmin,
                 element: <AdminPrivateRoute> <MakeAdmin></MakeAdmin></AdminPrivateRoute>
+            },
+
+            // riders routes
+            {
+                path: "/dashboard/assignRidersParcels",
+                element: <RiderPrivateRoute> <AssignRidersToParcel></AssignRidersToParcel> </RiderPrivateRoute>
             }
         ]
     }

@@ -16,6 +16,7 @@ const AssignRidersToParcel = () => {
         enabled: !!user?.email,
         queryFn: async () => {
             const res = await axiosApi.get(`rider/parcelAssigned?email=${user?.email}`);
+            console.log(res.data)
             return res.data;
         }
     });
@@ -51,7 +52,9 @@ const AssignRidersToParcel = () => {
                 });
             }
         })
-    }
+    };
+    console.log(parcels)
+    
     return (
        <div className="p-6">
             <h2 className="text-2xl font-bold mb-4">Pending Deliveries</h2>

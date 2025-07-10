@@ -1,7 +1,7 @@
 import React from 'react';
 import {  NavLink, Outlet } from 'react-router';
 import logo from ".././assets/logo.png";
-import { FaHome, FaBoxOpen, FaMoneyCheckAlt, FaUserEdit, FaSearchLocation, FaUserCheck, FaUserClock, FaStackExchange } from 'react-icons/fa';
+import { FaHome, FaBoxOpen, FaMoneyCheckAlt, FaUserEdit, FaSearchLocation, FaUserCheck, FaUserClock, FaStackExchange, FaCheckCircle, FaWallet } from 'react-icons/fa';
 import { FaMotorcycle, FaShield } from 'react-icons/fa6';
 import UseRoleQuery from '../CustomHooks/UseRoleQuery';
 
@@ -91,6 +91,18 @@ const DashboardRoot = () => {
                                 <NavLink to="/dashboard/assignRidersParcels">
                                     <FaStackExchange className="inline-block mr-2" />
                                     Your Assigned Parcels
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/dashboard/completedDeliveries">
+                                    <FaCheckCircle className="inline-block mr-2" />
+                                    My Completed Deliveries
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/dashboard/myEarnings">
+                                    <FaWallet className="inline-block mr-2" />
+                                    My Earnings
                                 </NavLink>
                             </li>
                         </>

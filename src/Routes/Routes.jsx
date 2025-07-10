@@ -21,6 +21,8 @@ import ForbiddenAccess from "../Pages/ForbiddenAccess/ForbiddenAccess";
 import AssignRiders from "../Pages/DashboardPages/AssignRiders";
 import RiderPrivateRoute from "../Pages/PrivateRoute/RiderPrivateRoute";
 import AssignRidersToParcel from "../Pages/DashboardPages/AssignRidersToParcel";
+import MyCompletedDeliveries from "../Pages/DashboardPages/MyCompletedDeliveries";
+import RidersEarnings from "../Pages/DashboardPages/RidersEarnings";
 
 export const routers = createBrowserRouter([
     {
@@ -105,7 +107,16 @@ export const routers = createBrowserRouter([
             {
                 path: "/dashboard/assignRidersParcels",
                 element: <RiderPrivateRoute> <AssignRidersToParcel></AssignRidersToParcel> </RiderPrivateRoute>
+            },
+            {
+                path: "/dashboard/completedDeliveries",
+                element: <RiderPrivateRoute> <MyCompletedDeliveries></MyCompletedDeliveries> </RiderPrivateRoute>
+            },
+            {
+                path: "/dashboard/myEarnings",
+                element: <RiderPrivateRoute> <RidersEarnings></RidersEarnings> </RiderPrivateRoute>
             }
+
         ]
     }
 ])
